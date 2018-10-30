@@ -49,11 +49,28 @@ public class TreeViewHelper {
 		  if (listOfFiles[i].isFile()) {
 		    users.add(new TreeItem(listOfFiles[i].getName()));
 		  } else if (listOfFiles[i].isDirectory()) {
-			users.add(new TreeItem(listOfFiles[i].getName()));
+			//users.add(new TreeItem(listOfFiles[i].getName()));
+			  users.add(new TreeItem(getChildren(listOfFiles[i].getPath())));
 		  }
 		}
 		
 		return users;
+	}
+
+	private TreeItem getChildren(String path) {
+		File folder = new File(path);
+		File[] listOfFiles = folder.listFiles();
+		
+		for (int i = 0; i < listOfFiles.length; i++) {
+			  if (listOfFiles[i].isFile()) {
+			    users.add(new TreeItem(listOfFiles[i].getName()));
+			  } else if (listOfFiles[i].isDirectory()) {
+				//users.add(new TreeItem(listOfFiles[i].getName()));
+				  users.add(getChildren(listOfFiles[i].getPath()));
+			  }
+			}
+		
+		return null;
 	}
 
 	private ArrayList<TreeItem> getMotorcycles() {
