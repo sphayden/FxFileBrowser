@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="530.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+   <children>
+      <Button defaultButton="true" layoutX="412.0" layoutY="207.0" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="97.0" prefWidth="221.0" text="Save" />
+      <Button cancelButton="true" layoutX="143.0" layoutY="207.0" mnemonicParsing="false" prefHeight="97.0" prefWidth="221.0" text="Cancel" />
+   </children>
+</AnchorPane>
