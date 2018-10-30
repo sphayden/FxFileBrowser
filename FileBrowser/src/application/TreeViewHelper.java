@@ -2,8 +2,12 @@ package application;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 
 
 public class TreeViewHelper {
@@ -13,112 +17,32 @@ public class TreeViewHelper {
 	}
 	
 	public ArrayList<TreeItem> getProducts() {
-		ArrayList<TreeItem> products = new ArrayList<TreeItem>();
+		ArrayList<TreeItem> tree = new ArrayList<TreeItem>();
 		
-		TreeItem users = new TreeItem("Users");
-		users.getChildren().addAll(getUsers());
+		File dir = new File("C:/");
 		
-		TreeItem cars = new TreeItem("Cars");
-		cars.getChildren().addAll(getCars());
+		TreeItem root = new TreeItem(dir.getName());
+		root.getChildren().addAll(listFileTree(dir));
+		tree.add(root);
 		
-		TreeItem buses = new TreeItem("Buses");
-		cars.getChildren().addAll(getBuses());
-		
-		TreeItem trucks = new TreeItem("Trucks");
-		cars.getChildren().addAll(getTrucks());
-		
-		TreeItem motorcycles = new TreeItem("Motorcycles");
-		cars.getChildren().addAll(getMotorcycles());
-		
-//		products.add(cars);
-//		products.add(trucks);
-//		products.add(motorcycles);
-//		products.add(buses);
-		products.add(users);
-		
-		return products;
-	}
-
-	private ArrayList<TreeItem> getUsers() {
-		ArrayList<TreeItem> users = new ArrayList<TreeItem>();
-		
-		File folder = new File("C:\\Users");
-		File[] listOfFiles = folder.listFiles();
-
-		for (int i = 0; i < listOfFiles.length; i++) {
-		  if (listOfFiles[i].isFile()) {
-		    users.add(new TreeItem(listOfFiles[i].getName()));
-		  } else if (listOfFiles[i].isDirectory()) {
-			//users.add(new TreeItem(listOfFiles[i].getName()));
-			  users.add(new TreeItem(getChildren(listOfFiles[i].getPath())));
-		  }
-		}
-		
-		return users;
-	}
-
-	private TreeItem getChildren(String path) {
-		File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
-		
-		for (int i = 0; i < listOfFiles.length; i++) {
-			  if (listOfFiles[i].isFile()) {
-			    users.add(new TreeItem(listOfFiles[i].getName()));
-			  } else if (listOfFiles[i].isDirectory()) {
-				//users.add(new TreeItem(listOfFiles[i].getName()));
-				  users.add(getChildren(listOfFiles[i].getPath()));
-			  }
-			}
-		
-		return null;
-	}
-
-	private ArrayList<TreeItem> getMotorcycles() {
-		ArrayList<TreeItem> motorcycles = new ArrayList<TreeItem>();
-		
-		TreeItem harley = new TreeItem("Harley");
-		TreeItem suzuki = new TreeItem("Suzuki");
-		
-		motorcycles.add(harley);
-		motorcycles.add(suzuki);
-		
-		return motorcycles;
-	}
-
-	private ArrayList<TreeItem> getTrucks() {
-		ArrayList<TreeItem> trucks = new ArrayList<TreeItem>();
-		
-		TreeItem scania = new TreeItem("scania");
-		TreeItem mercedes = new TreeItem("mercedes");
-		
-		trucks.add(mercedes);
-		trucks.add(scania);
-		
-		return trucks;
-	}
-
-	private ArrayList<TreeItem> getBuses() {
-		ArrayList<TreeItem> buses = new ArrayList<TreeItem>();
-		
-		TreeItem gm = new TreeItem("GM");
-		TreeItem vw = new TreeItem("VW");
-		
-		buses.add(gm);
-		buses.add(vw);
-		
-		return buses;
-	}
-
-	private ArrayList<TreeItem> getCars() {
-		ArrayList<TreeItem> cars = new ArrayList<TreeItem>();
-		
-		TreeItem mercedes = new TreeItem("Mercedes");
-		TreeItem scania = new TreeItem("Scania");
-		
-		cars.add(mercedes);
-		cars.add(scania);
-		
-		return cars;
+		return tree;
 	}
 	
+	public static ArrayList<TreeItem> listFileTree(File dir) {
+		ArrayList<TreeItem> treeItem = new ArrayList<TreeItem>();
+		
+	    Set<File> fileTree = new HashSet<File>();
+	    if(dir==null||dir.listFiles()==null){
+	        return treeItem;
+	    }
+	    for (File entry : dir.listFiles()) {
+	        if (entry.isFile()) treeItem.add(new TreeItem(entry.getName()));
+	        else {
+	        	TreeItem item = new TreeItem(entry.getName());
+	        	item.getChildren().addAll(listFileTree(entry));
+	        	treeItem.add(item);
+	        }
+	    }
+	    return treeItem;
+	}
 }
