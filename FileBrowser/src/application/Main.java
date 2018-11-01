@@ -3,9 +3,11 @@ package application;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -21,9 +23,11 @@ public class Main extends Application {
 			rootItem.getChildren().addAll(products);
 			treeView.setRoot(rootItem);
 			
-			VBox root = new VBox();
-			root.getChildren().add(treeView);
 			
+			
+			
+			AnchorPane root = FXMLLoader.load(getClass().getResource("view.fxml"));
+			root.getChildren().add(treeView);
 			Scene scene = new Scene(root,400,400);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("TreeView Example");
@@ -32,9 +36,6 @@ public class Main extends Application {
 //			Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
 //			Scene scene = new Scene(root);
 //			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//			primaryStage.setTitle("FXML Welcome");
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -1,13 +1,13 @@
 package application;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 
 
 public class TreeViewHelper {
@@ -19,11 +19,13 @@ public class TreeViewHelper {
 	public ArrayList<TreeItem> getProducts() {
 		ArrayList<TreeItem> tree = new ArrayList<TreeItem>();
 		
-		File dir = new File("C:/");
+		File dir = new File("C://Users/187218");
+		FileNode node = new FileNode(dir.getAbsolutePath(), Long.toString(dir.length()), dir.getName());
 		
-		TreeItem root = new TreeItem(dir.getName());
+		TreeItem root = new TreeItem(node.getName());
 		root.getChildren().addAll(listFileTree(dir));
 		tree.add(root);
+		
 		
 		return tree;
 	}
@@ -37,8 +39,13 @@ public class TreeViewHelper {
 	    }
 	    for (File entry : dir.listFiles()) {
 	        if (entry.isFile()) treeItem.add(new TreeItem(entry.getName()));
+	        if (entry.isFile()) {
+	        	FileNode node = new FileNode(entry.getAbsolutePath(), Long.toString(entry.length()), entry.getName());
+	        	TreeItem treeItm = new TreeItem(node);
+	        }
 	        else {
-	        	TreeItem item = new TreeItem(entry.getName());
+	        	FileNode node = new FileNode(entry.getAbsolutePath(), Long.toString(entry.length()), entry.getName());
+	        	TreeItem item = new TreeItem(node);
 	        	item.getChildren().addAll(listFileTree(entry));
 	        	treeItem.add(item);
 	        }
