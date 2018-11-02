@@ -45,7 +45,7 @@ public class TreeViewHelper {
 	        }
 	        else {
 	        	FileNode node = new FileNode(entry.getAbsolutePath(), Long.toString(entry.length()), entry.getName());
-	        	TreeItem item = new TreeItem(node);
+	        	TreeItem item = new TreeItem(node.getName());
 	        	item.getChildren().addAll(listFileTree(entry));
 	        	treeItem.add(item);
 	        }
