@@ -38,14 +38,13 @@ public class TreeViewHelper {
 	        return treeItem;
 	    }
 	    for (File entry : dir.listFiles()) {
-	        if (entry.isFile()) treeItem.add(new TreeItem(entry.getName()));
 	        if (entry.isFile()) {
 	        	FileNode node = new FileNode(entry.getAbsolutePath(), Long.toString(entry.length()), entry.getName());
 	        	TreeItem treeItm = new TreeItem(node);
 	        }
 	        else {
 	        	FileNode node = new FileNode(entry.getAbsolutePath(), Long.toString(entry.length()), entry.getName());
-	        	TreeItem item = new TreeItem(node.getName());
+	        	TreeItem item = new TreeItem(node);
 	        	item.getChildren().addAll(listFileTree(entry));
 	        	treeItem.add(item);
 	        }

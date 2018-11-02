@@ -11,6 +11,11 @@ public class FileNode {
 	String fileSize = "";
 	String name = "";
 	
+	@Override
+	public String toString() {
+	    return path;
+	}
+	
 	public String getName() {
 		return name;
 	}

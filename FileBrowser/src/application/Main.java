@@ -6,6 +6,7 @@ import javax.swing.event.ChangeListener;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -49,6 +50,9 @@ public class Main extends Application {
 	
 	private Object handle(Object newValue) {
 		System.out.println(newValue);
+		
+		
+		
 		return null;
 	}
 
