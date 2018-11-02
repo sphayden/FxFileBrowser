@@ -13,7 +13,7 @@ public class FileNode {
 	
 	@Override
 	public String toString() {
-	    return path;
+	    return path + "," + fileSize + "," + name;
 	}
 	
 	public String getName() {

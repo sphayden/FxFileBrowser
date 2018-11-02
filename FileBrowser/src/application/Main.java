@@ -50,10 +50,9 @@ public class Main extends Application {
 	
 	private Object handle(Object newValue) {
 		System.out.println(newValue);
+		String[] nodeData = newValue.toString().split(",");
 		
-		
-		
-		return null;
+		return nodeData;
 	}
 
 	public static void main(String[] args) {
