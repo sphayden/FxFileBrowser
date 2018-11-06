@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,6 +13,7 @@ public class Controller {
 	@FXML
 	TreeView myTreeView = new TreeView();
 	
+	TreeViewHelper helper = new TreeViewHelper();
 	@FXML
 	Label testLabel = new Label();
 	
@@ -18,5 +21,16 @@ public class Controller {
 	void ClickHandler() {
 		System.out.println("Hello Bois");
 		testLabel.setText("testetstestes");	
+		
+		Main main = new Main();
+		main = main.getInstance();
+		
+		Object test = myTreeView.getSelectionModel().getSelectedItem();
+		
+	}
+	
+	@FXML
+	void ClickHandler2() {
+		Object test = myTreeView.getSelectionModel().getSelectedItem();
 	}
 }

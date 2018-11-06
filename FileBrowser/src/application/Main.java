@@ -17,26 +17,42 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
+	private static Main instance;
+	public Main() {
+		instance = this;
+	}
+	public static Main getInstance() {
+		return instance;
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			TreeViewHelper helper = new TreeViewHelper();
-			ArrayList<TreeItem> products = helper.getProducts();
-			TreeView treeView = new TreeView();
-			TreeItem rootItem = new TreeItem("Root");
-			rootItem.getChildren().addAll(products);
-			treeView.setRoot(rootItem);
-			treeView.setId("myTreeView");
+//			TreeViewHelper helper = new TreeViewHelper();
+//			ArrayList<TreeItem> products = helper.getProducts();
+//			TreeView treeView = new TreeView();
+//			TreeItem rootItem = new TreeItem("Root");
+//			rootItem.getChildren().addAll(products);
+//			treeView.setRoot(rootItem);
+			//treeView.setId("myTreeView");
 			
 			AnchorPane root = FXMLLoader.load(getClass().getResource("view.fxml"));
-			root.getChildren().add(treeView);
-			Scene scene = new Scene(root,400,400);
+			
+			TreeView treeView2 = (TreeView) root.lookup("#myTreeView");
+			TreeViewHelper helper = new TreeViewHelper();
+			ArrayList<TreeItem> products = helper.getProducts();
+			TreeItem rootItem = new TreeItem("Root");
+			rootItem.getChildren().addAll(products);
+			treeView2.setRoot(rootItem);
+			
+			//root.getChildren().add(treeView2);
+			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("TreeView Example");
 			primaryStage.show();
 			
 
-			treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> handle(newValue));
+			treeView2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> handle(newValue));
 			
 			
 //			Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
@@ -48,7 +64,11 @@ public class Main extends Application {
 		}
 	}
 	
-	private Object handle(Object newValue) {
+	public Object getSelectedNode(TreeView treeView) {
+		return treeView.getSelectionModel().getSelectedItem().toString().split(",");
+	}
+	
+	public Object handle(Object newValue) {
 		System.out.println(newValue);
 		String[] nodeData = newValue.toString().split(",");
 		
