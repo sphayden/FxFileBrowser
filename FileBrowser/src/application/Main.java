@@ -45,7 +45,6 @@ public class Main extends Application {
 			rootItem.getChildren().addAll(products);
 			treeView2.setRoot(rootItem);
 			
-			//root.getChildren().add(treeView2);
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("TreeView Example");
@@ -53,11 +52,6 @@ public class Main extends Application {
 			
 
 			treeView2.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> handle(newValue));
-			
-			
-//			Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
-//			Scene scene = new Scene(root);
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -71,6 +65,7 @@ public class Main extends Application {
 	public Object handle(Object newValue) {
 		System.out.println(newValue);
 		String[] nodeData = newValue.toString().split(",");
+		
 		
 		return nodeData;
 	}

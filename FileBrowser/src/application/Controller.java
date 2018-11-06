@@ -19,7 +19,7 @@ public class Controller {
 	
 	@FXML
 	void ClickHandler() {
-		System.out.println("Hello Bois");
+		System.out.println("test");
 		testLabel.setText("testetstestes");	
 		
 		Main main = new Main();
